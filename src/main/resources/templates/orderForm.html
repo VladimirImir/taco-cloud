@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Taco Cloud</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+
+<body>
+
+<!-- Form - тут отличается от формы design.html : он опледиляет атрибут "action".  -->
+<!-- Без этого атрибута форма отправит HTTP-запрос POST обратно на тот же URL. -->
+<!-- Но здесь мы указали, что форма должна быть отправлена HTTP-запросом POST с путем /orders -->
+<!-- это сделано с помощью опетатора @{...} определения контекстно-зависимого пути. -->
+
+<form method="POST" th:action="@{/orders}" th:object="${tacoOrder}">
+    <h1>Закажите свои творения Тако!</h1>
+
+    <img th:src="@{/images/TacoCloud.png}"/>
+
+    <h3>Ваш Тако в таком порядке:</h3>
+    <a th:href="@{/design}" id="another">Создайте другой Тако</a><br/>
+
+    <!-- Разметка начинается с перечисления Тако, добавленный в заказ с помощью th:each -->
+    <!-- и затем отображает форме заказа. -->
+
+    <ul>
+        <li th:each="taco : ${tacoOrder.tacos}">
+            <span th:text="${taco.name}">taco name</span></li>
+    </ul>
+
+
+    <h3>Доставьте мои шедевры тако...</h3>
+    <label for="deliveryName">Имя: </label>
+    <input type="text" th:field="*{deliveryName}"/>
+    <br/>
+
+    <label for="deliveryStreet">Адресс улицы: </label>
+    <input type="text" th:field="*{deliveryStreet}"/>
+    <br/>
+
+    <label for="deliveryCity">Город: </label>
+    <input type="text" th:field="*{deliveryCity}"/>
+    <br/>
+
+    <label for="deliveryState">State: </label>
+    <input type="text" th:field="*{deliveryState}"/>
+    <br/>
+
+    <label for="deliveryZip">Zip code: </label>
+    <input type="text" th:field="*{deliveryZip}"/>
+    <br/>
+
+    <h3>Вот как я заплачу...</h3>
+    <label for="Number">Кредитная карта #: </label>
+    <input type="text" th:field="*{Number}"/>
+    <br/>
+
+    <label for="Expiration">Срок действия: </label>
+    <input type="text" th:field="*{Expiration}"/>
+    <br/>
+
+    <label for="CVV">CVV: </label>
+    <input type="text" th:field="*{CVV}"/>
+    <br/>
+
+    <input type="submit" value="Подтвердить заказ"/>
+</form>
+</body>
+</html>

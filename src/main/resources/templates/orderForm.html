@@ -33,35 +33,59 @@
     <h3>Доставьте мои шедевры тако...</h3>
     <label for="deliveryName">Имя: </label>
     <input type="text" th:field="*{deliveryName}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('deliveryName')}"
+          th:errors="*{deliveryName}"></span>
     <br/>
 
     <label for="deliveryStreet">Адресс улицы: </label>
     <input type="text" th:field="*{deliveryStreet}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('deliveryStreet')}"
+          th:errors="*{deliveryStreet}"></span>
     <br/>
 
     <label for="deliveryCity">Город: </label>
     <input type="text" th:field="*{deliveryCity}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('deliveryCity')}"
+          th:errors="*{deliveryCity}"></span>
     <br/>
 
     <label for="deliveryState">State: </label>
     <input type="text" th:field="*{deliveryState}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('deliveryState')}"
+          th:errors="*{deliveryState}"></span>
     <br/>
 
     <label for="deliveryZip">Zip code: </label>
     <input type="text" th:field="*{deliveryZip}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('deliveryZip')}"
+          th:errors="*{deliveryZip}"></span>
     <br/>
 
     <h3>Вот как я заплачу...</h3>
     <label for="Number">Кредитная карта #: </label>
     <input type="text" th:field="*{Number}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('Number')}"
+          th:errors="*{Number}"></span>
     <br/>
 
     <label for="Expiration">Срок действия: </label>
     <input type="text" th:field="*{Expiration}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('Expiration')}"
+          th:errors="*{Expiration}"></span>
     <br/>
 
     <label for="CVV">CVV: </label>
     <input type="text" th:field="*{CVV}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('CVV')}"
+          th:errors="*{CVV}"></span>
     <br/>
 
     <input type="submit" value="Подтвердить заказ"/>

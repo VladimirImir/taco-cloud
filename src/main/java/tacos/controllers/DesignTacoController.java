@@ -1,8 +1,10 @@
 package tacos.controllers;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import tacos.Ingredient;
 import tacos.Taco;
@@ -105,7 +107,20 @@ public class DesignTacoController {
     // @ModelAttribute - аннотация перед параметром TacoOrder указывает, что он должен использовать
     // объект TacoOrder, который был помещен в модель методом order() с аннотацией @ModelAttribute.
 
-    public String processTaco(Taco taco, @ModelAttribute TacoOrder tacoOrder) {
+    // @Valid - требует выполнить проверку отправленного объекта Taco после его привязки
+    // к отправленной форме, но до начала выполнения тела метода processTaco().
+    // Если обнаружатся какие-либо ошибки, то сведенья о них будут зафиксированы в объекте Errors
+    // который передается в processTaco().
+    // Первые несколько строк в processTaco() проверяют наличие ошибок, вызывая метод hasErrors()
+    // объекта Errors. Если ошибки есть, то метод processTaco() щавершает работу без обработки Taco
+    // и возвращает имя представления "design", что бы повторно отобразить форму.
+
+    public String processTaco(@Valid Taco taco, Errors errors, @ModelAttribute TacoOrder tacoOrder) {
+
+        if (errors.hasErrors()) {
+            return "design";
+        }
+
         tacoOrder.addTaco(taco);
         log.info("Processing taco: {}", taco);
 

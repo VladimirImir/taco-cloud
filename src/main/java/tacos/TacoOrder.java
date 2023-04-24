@@ -14,6 +14,9 @@ import java.util.List;
 @Data
 public class TacoOrder implements Serializable {
 
+    /** Модификатора static - с англ. "статичный", "постоянный" -
+     *  делает переменную или метод "независимыми" от объекта.*/
+
     private static final long serialVersionUID = 1L;
     private Long id;
     private Date placedAt;
